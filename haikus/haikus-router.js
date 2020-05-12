@@ -1,0 +1,104 @@
+const express = require("express");
+const HaikusService = require("./haikus-service");
+const bodyParser = express.json();
+
+const haikusRouter = express.Router();
+
+const serializeHaiku = (haikuDB) => ({
+  id: haikuDB.id,
+  date_created: new Date(haikuDB.date_created).toString().slice(0, 15),
+  haiku: [haikuDB.haiku[0], haikuDB.haiku[1], haikuDB.haiku[2]],
+  penname: haikuDB.penname,
+});
+
+haikusRouter
+  .route("/")
+  .get((req, res, next) => {
+    HaikusService.getAllHaikus(req.app.get("db"))
+      .then((haikus) => {
+        console.log("haikus in router", haikus);
+        if (haikus.length === 0) {
+          return res.status(200).json([]);
+        }
+        res.status(200).json(haikus.map(serializeHaiku));
+      })
+      .catch(next);
+  })
+  .post(bodyParser, (req, res, next) => {
+    if (req.body.length < 4 || req.body.length > 4) {
+      return res.status(404).json({
+        error: `Bad request body; try again`,
+      });
+    }
+    const { haiku } = req.body;
+
+    const phrases = [
+      { text_p: haiku[0], syllables: 5, org_line: 1 },
+      { text_p: haiku[1], syllables: 7, org_line: 2 },
+      { text_p: haiku[2], syllables: 5, org_line: 3 },
+    ];
+    const penname = haiku[3];
+
+    return HaikusService.insertNewHaiku(req.app.get("db"), phrases, penname)
+      .then((id) => {
+        console.log(id);
+        res.status(201).json({ message: `haiku with id ${id[0]} created` });
+      })
+      .catch(next);
+  });
+
+haikusRouter
+  .route("/penname")
+  //.all(bodyParser, checkPennameExists)
+  .get(bodyParser, (req, res) => {
+    const { penname } = req.body;
+    if (
+      penname.length === 0 ||
+      penname.length > 20 ||
+      typeof penname !== "string"
+    ) {
+      return res.status(404).json({
+        error: `Bad penname; try again`,
+      });
+    }
+
+    return HaikusService.getByPenname(req.app.get("db"), penname)
+      .then((haikus) => {
+        console.log(haikus);
+        if (haikus == null || haikus.length === 0) {
+          return res.status(400).json({
+            error: `No haikus found with that penname. Please try again`,
+          });
+        }
+
+        res.status(200).json(haikus.map(serializeHaiku));
+      })
+      .catch((error) => console.log(error));
+  });
+
+// async function checkPennameExists(req, res, next) {
+//   try {
+//     console.log("inside the async", req.body);
+//     const { penname } = bodyParser(req.body);
+//     if (penname.length > 20 || typeof penname !== "string")
+//       return res.status(404).json({
+//         error: `Bad penname; try again`,
+//       });
+
+//     const haikus = await HaikusService.getByPenname(req.app.get("db"), penname);
+
+//     console.log(haikus);
+//     if (!haikus)
+//       return res.status(404).json({
+//         error: `penname doesn't exist or has written 0 haikus`,
+//       });
+
+//     console.log(res);
+//     res.haikus = haikus;
+//     next();
+//   } catch (error) {
+//     next(error);
+//   }
+// }
+
+module.exports = haikusRouter;
