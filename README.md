@@ -1,26 +1,72 @@
-# Express Boilerplate!
+# Haiku Dada API
 
-This is a boilerplate project used for starting new projects!
+### [Haiku Dada API: Live Site](https://intense-ridge-06549.herokuapp.com/)
 
-## Set up
+##### Summary
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+          Haiku Dada is a platform where users can auto-generate new haikus by
+          using a madlibs-style form. Users can also view all previously created
+          haikus. Finally, users can view a randomly generated haiku - based on
+          the inputs of previous users.
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+## Haiku Dada API in a local development environment
 
-## Scripts
+### Installation
 
-Start the application `npm start`
+* Clone this repository:
+  * `git clone https://github.com/devlewis/haiku-shift-api`
+* Install dependencies 
 
-Start nodemon for the application `npm run dev`
+### Run Program
 
-Run the tests `npm test`
+* Create local database and user 
+* Run `npm run migrate --1`
+* Make requests using the root: `localhost:8000` or your specified port
 
-## Deploying
+### Test
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+* Run `npm test`
+
+
+
+## API Overview
+
+### /api
+
+* The /api endpoint is for getting all haikus and posting newly generating ones. 
+
+#### GET /api/
+
+* Successful response (200) will return the haiku collection
+* If haiku collection is empty, will return response 200 and an empty array in the response body. 
+
+#### POST /api/
+
+* adds a new haiku to the haiku collection.
+* Valid requests must provide an array 'haiku' in the request body
+
+  * Both fields must be strings
+  * Neither field may contain leading or trailing whitespace
+  * Usernames must be 1-20 characters
+  * Passwords must be 8-72 characters
+
+##### Live App Screenshots
+
+![](src/images/Screen%20Shot%202020-04-25%20at%204.57.52%20PM.png) 
+----------
+![](src/images/Screen%20Shot%202020-04-25%20at%204.59.01%20PM.png) 
+----------
+![](src/images/Screen%20Shot%202020-04-25%20at%204.59.35%20PM.png) 
+----------
+![](src/images/Screen%20Shot%202020-04-25%20at%205.03.59%20PM.png)
+
+## Technology
+
+* [Node](https://nodejs.org/en/) and [Express](https://expressjs.com/)
+  * JWT authentication
+  * Mocha test framework and Chai assertion library, Supertest 
+  * Morgan, helmet 
+* PSQL
+* [Heroku](https://www.heroku.com/) Cloud Application Platform
+
+#####  
