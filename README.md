@@ -20,7 +20,7 @@
 ### Run Program
 
 * Create local database and user 
-* Run `npm run migrate --1`
+* Run `npm run migrate`
 * Make requests using the root: `localhost:8000` or your specified port
 
 ### Test
