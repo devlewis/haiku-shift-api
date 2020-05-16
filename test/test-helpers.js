@@ -93,7 +93,7 @@ function seedHaikuTables(db, phrases, haikus, haiku_phrases = []) {
     await trx.raw(`SELECT setval('haikus_id_seq', ?)`, [
       haikus[haikus.length - 1].id,
     ]);
-    // only insert days if there are some, also update the sequence counter
+    // only insert haiku_phrases if there are some, also update the sequence counter
     if (haiku_phrases.length) {
       await trx.into("haiku_phrases").insert(haiku_phrases);
     }

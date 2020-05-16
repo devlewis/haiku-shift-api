@@ -19,7 +19,7 @@ VALUES
 ('orange lamb will walk.', 5, 3);
 
 INSERT INTO haikus (penname)
-VALUES ('Harry Stylez'),('Emmarock123'),('');
+VALUES ('HarryStylez'),('Emmarock123'),('');
 
 INSERT INTO haiku_phrases (haiku_id, phrase_id)
 VALUES (1, 1), (1, 2), (1, 3), (2, 4), (2, 5), (2, 6), (3, 7), (3, 8), (3, 9);

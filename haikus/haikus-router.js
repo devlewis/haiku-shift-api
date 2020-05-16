@@ -14,6 +14,7 @@ const serializeHaiku = (haikuDB) => ({
 haikusRouter
   .route("/")
   .get((req, res, next) => {
+    console.log("inside get");
     HaikusService.getAllHaikus(req.app.get("db"))
       .then((haikus) => {
         console.log("haikus in router", haikus);
@@ -22,7 +23,7 @@ haikusRouter
         }
         res.status(200).json(haikus.map(serializeHaiku));
       })
-      .catch(next);
+      .catch((error) => res.status(500).json({ error: "server error" }));
   })
   .post(bodyParser, (req, res, next) => {
     if (req.body.length < 4 || req.body.length > 4) {
@@ -48,21 +49,22 @@ haikusRouter
   });
 
 haikusRouter
-  .route("/penname")
+  .route("/penname/:penname")
   //.all(bodyParser, checkPennameExists)
   .get(bodyParser, (req, res) => {
-    const { penname } = req.body;
+    console.log(req.params);
+    const letterNumber = /^[0-9a-zA-Z]+$/;
     if (
-      penname.length === 0 ||
-      penname.length > 20 ||
-      typeof penname !== "string"
+      req.params.penname.length === 0 ||
+      req.params.penname.length > 20 ||
+      !req.params.penname.match(letterNumber)
     ) {
       return res.status(404).json({
         error: `Bad penname; try again`,
       });
     }
 
-    return HaikusService.getByPenname(req.app.get("db"), penname)
+    return HaikusService.getByPenname(req.app.get("db"), req.params.penname)
       .then((haikus) => {
         console.log(haikus);
         if (haikus == null || haikus.length === 0) {
