@@ -20,7 +20,7 @@
 ### Run Program
 
 * Create local database and user 
-* Run `npm run migrate --1`
+* Run `npm run migrate`
 * Make requests using the root: `localhost:8000` or your specified port
 
 ### Test
@@ -44,11 +44,7 @@
 
 * adds a new haiku to the haiku collection.
 * Valid requests must provide an array 'haiku' in the request body
-
-  * Both fields must be strings
-  * Neither field may contain leading or trailing whitespace
-  * Usernames must be 1-20 characters
-  * Passwords must be 8-72 characters
+* Successful request will return 
 
 ##### Live App Screenshots
 
@@ -63,7 +59,6 @@
 ## Technology
 
 * [Node](https://nodejs.org/en/) and [Express](https://expressjs.com/)
-  * JWT authentication
   * Mocha test framework and Chai assertion library, Supertest 
   * Morgan, helmet 
 * PSQL
