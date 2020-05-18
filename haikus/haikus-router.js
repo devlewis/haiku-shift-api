@@ -26,7 +26,9 @@ haikusRouter
       .catch((error) => res.status(500).json({ error: "server error" }));
   })
   .post(bodyParser, (req, res, next) => {
-    if (req.body.length < 4 || req.body.length > 4) {
+    console.log("post!");
+    console.log(req.body);
+    if (req.body.haiku < 4 || req.body.haiku > 4 || !req.body.haiku) {
       return res.status(404).json({
         error: `Bad request body; try again`,
       });
