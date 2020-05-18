@@ -55,7 +55,7 @@ the inputs of previous users.
 
 ##### Live App Screenshots
 
-## ![](src/images/Screen%20Shot%202020-04-25%20at%204.57.52%20PM.png)
+## ![](images/Screen Shot 2020-05-17 at 9.13.40 PM.png)
 
 ## ![](src/images/Screen%20Shot%202020-04-25%20at%204.59.01%20PM.png)
 
