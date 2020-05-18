@@ -64,36 +64,6 @@ const HaikusService = {
       });
   },
 
-  get5phrase(db) {
-    return db
-      .from("phrases")
-      .select("text_p")
-      .where("syllables", 5)
-      .orderByRaw("random()")
-      .limit(1)
-      .returning("text_p");
-  },
-
-  get7phrase(db) {
-    return db
-      .from("phrases")
-      .select("text_p")
-      .where("syllables", 7)
-      .orderByRaw("random()")
-      .limit(1)
-      .returning("text_p");
-  },
-
-  getRandomHaiku(db) {
-    return new Promise((resolve) => {
-      resolve([
-        HaikusService.get5phrase(db),
-        HaikusService.get7phrase(db),
-        HaikusService.get5phrase(db),
-      ]);
-    });
-  },
-
   getByPenname(db, penname) {
     return HaikusService.getAllHaikus(db, penname).where(
       "haikus.penname",

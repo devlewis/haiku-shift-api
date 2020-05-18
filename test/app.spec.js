@@ -90,8 +90,8 @@ describe("App", () => {
     );
     context("Given penname doesn't exist", () => {
       it("responds with 400, error message", () => {
-        const penname = { penname: "Popeye" };
-        return supertest(app).get("/api/penname").send(penname).expect(400, {
+        const penname = "Popeye";
+        return supertest(app).get(`/api/penname/${penname}`).expect(400, {
           error: `No haikus found with that penname. Please try again`,
         });
       });
@@ -99,8 +99,8 @@ describe("App", () => {
 
     context("Given penname is not a string", () => {
       it("responds with 404, error message", () => {
-        const penname = { penname: ["I'm an Array"] };
-        return supertest(app).get("/api/penname").send(penname).expect(404, {
+        const penname = ["I'm an array"];
+        return supertest(app).get(`/api/penname/${penname}`).expect(404, {
           error: `Bad penname; try again`,
         });
       });
@@ -108,19 +108,10 @@ describe("App", () => {
 
     context("Given penname is too long", () => {
       it("responds with 404, error message", () => {
-        const penname = {
-          penname: "I'm a fake penname I'm a fake penname I'm a fake penname",
-        };
-        return supertest(app).get("/api/penname").send(penname).expect(404, {
-          error: `Bad penname; try again`,
-        });
-      });
-    });
+        const penname =
+          "I'm a fake penname I'm a fake penname I'm a fake penname";
 
-    context("Given penname is empty", () => {
-      it("responds with 404, error message", () => {
-        const penname = { penname: "" };
-        return supertest(app).get("/api/penname").send(penname).expect(404, {
+        return supertest(app).get(`/api/penname/${penname}`).expect(404, {
           error: `Bad penname; try again`,
         });
       });

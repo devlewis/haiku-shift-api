@@ -48,59 +48,31 @@ haikusRouter
       .catch(next);
   });
 
-haikusRouter
-  .route("/penname/:penname")
-  //.all(bodyParser, checkPennameExists)
-  .get(bodyParser, (req, res) => {
-    console.log(req.params);
-    const letterNumber = /^[0-9a-zA-Z]+$/;
-    if (
-      req.params.penname.length === 0 ||
-      req.params.penname.length > 20 ||
-      !req.params.penname.match(letterNumber)
-    ) {
-      return res.status(404).json({
-        error: `Bad penname; try again`,
-      });
-    }
+haikusRouter.route("/penname/:penname").get(bodyParser, (req, res) => {
+  console.log(req.params);
+  const letterNumber = /^[0-9a-zA-Z]+$/;
+  if (
+    req.params.penname.length === 0 ||
+    req.params.penname.length > 20 ||
+    !req.params.penname.match(letterNumber)
+  ) {
+    return res.status(404).json({
+      error: `Bad penname; try again`,
+    });
+  }
 
-    return HaikusService.getByPenname(req.app.get("db"), req.params.penname)
-      .then((haikus) => {
-        console.log(haikus);
-        if (haikus == null || haikus.length === 0) {
-          return res.status(400).json({
-            error: `No haikus found with that penname. Please try again`,
-          });
-        }
+  return HaikusService.getByPenname(req.app.get("db"), req.params.penname)
+    .then((haikus) => {
+      console.log(haikus);
+      if (haikus == null || haikus.length === 0) {
+        return res.status(400).json({
+          error: `No haikus found with that penname. Please try again`,
+        });
+      }
 
-        res.status(200).json(haikus.map(serializeHaiku));
-      })
-      .catch((error) => console.log(error));
-  });
-
-// async function checkPennameExists(req, res, next) {
-//   try {
-//     console.log("inside the async", req.body);
-//     const { penname } = bodyParser(req.body);
-//     if (penname.length > 20 || typeof penname !== "string")
-//       return res.status(404).json({
-//         error: `Bad penname; try again`,
-//       });
-
-//     const haikus = await HaikusService.getByPenname(req.app.get("db"), penname);
-
-//     console.log(haikus);
-//     if (!haikus)
-//       return res.status(404).json({
-//         error: `penname doesn't exist or has written 0 haikus`,
-//       });
-
-//     console.log(res);
-//     res.haikus = haikus;
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// }
+      res.status(200).json(haikus.map(serializeHaiku));
+    })
+    .catch((error) => console.log(error));
+});
 
 module.exports = haikusRouter;
