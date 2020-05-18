@@ -1,6 +1,6 @@
 # Haiku Dada API
 
-### [Haiku Dada API: Live Site](https://intense-ridge-06549.herokuapp.com/)
+### [Haiku Dada API: Live Site](https://haiku-shift-client.now.sh/)
 
 ##### Summary
 
