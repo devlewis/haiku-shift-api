@@ -29,10 +29,6 @@ the inputs of previous users.
 
 ## API Overview
 
-### /api
-
-- The /api endpoint is for getting all haikus and posting newly generating ones.
-
 #### GET /api/
 
 - Successful response (200) will return the haiku collection
