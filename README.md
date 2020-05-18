@@ -39,11 +39,14 @@
 
 * Successful response (200) will return the haiku collection
 * If haiku collection is empty, will return response 200 and an empty array in the response body. 
+* Failed response will return 500 and error message
 
 #### POST /api/
 
 * adds a new haiku to the haiku collection.
-* Valid requests must provide an array 'haiku' in the request body
+* Valid requests must provide an array 'haiku' in the request body.
+<br>
+haiku: [line1(string, line2(string), line3(string), penname(string, may be empty)]
 * Successful request will return 
 
 ##### Live App Screenshots
