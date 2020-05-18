@@ -44,8 +44,9 @@
 #### POST /api/
 
 * adds a new haiku to the haiku collection.
-* Valid requests must provide an array 'haiku' in the request body
-haiku [line1(string, line2(string), line3(string), penname(string, may be empty)]
+* Valid requests must provide an array 'haiku' in the request body.
+<br>
+haiku: [line1(string, line2(string), line3(string), penname(string, may be empty)]
 * Successful request will return 
 
 ##### Live App Screenshots
