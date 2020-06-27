@@ -1,6 +1,6 @@
 # Haiku Dada API
 
-### [Haiku Dada API: Live Site](https://intense-ridge-06549.herokuapp.com/)
+### [Haiku Dada API: Live Site](https://haiku-shift-client.now.sh/)
 
 ##### Summary
 
@@ -19,7 +19,7 @@ the inputs of previous users.
 
 ### Run Program
 
-- Create local database and user
+- Create local database and user, local test database and user
 - Run `npm run migrate`
 - Make requests using the root: `localhost:8000` or your specified port
 
@@ -28,10 +28,6 @@ the inputs of previous users.
 - Run `npm test`
 
 ## API Overview
-
-### /api
-
-- The /api endpoint is for getting all haikus and posting newly generating ones.
 
 #### GET /api/
 
@@ -57,11 +53,11 @@ the inputs of previous users.
 
 ## ![](src/images/Screen%20Shot%202020-05-17%20at%209.13.40%20PM.png)
 
-## ![](src/images/Screen%20Shot%202020-04-25%20at%204.59.01%20PM.png)
+## ![](src/images/Screen%20Shot%202020-05-17%20at%209.14.18%20PM.png)
 
-## ![](src/images/Screen%20Shot%202020-04-25%20at%204.59.35%20PM.png)
+## ![](src/images/Screen%20Shot%202020-05-17%20at%209.14.41%20PM.png)
 
-![](src/images/Screen%20Shot%202020-04-25%20at%205.03.59%20PM.png)
+## ![](src/images/Screen%20Shot%202020-05-17%20at%209.14.53%20PM.png)
 
 ## Technology
 
