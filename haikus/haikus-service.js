@@ -6,7 +6,11 @@ const HaikusService = {
         "id",
         "date_created",
         db.raw(
-          'ARRAY(SELECT (phrases.text_p) FROM phrases JOIN haiku_phrases ON phrases.id=haiku_phrases.phrase_id WHERE haiku_phrases.haiku_id = haikus.id ORDER BY phrases.org_line ASC) AS "haiku"'
+          "ARRAY(SELECT (phrases.text_p) " +
+            "FROM phrases JOIN haiku_phrases " +
+            "ON phrases.id=haiku_phrases.phrase_id " +
+            "WHERE haiku_phrases.haiku_id = haikus.id " +
+            'ORDER BY phrases.org_line ASC) AS "haiku"'
         ),
         "penname"
       )
@@ -14,19 +18,16 @@ const HaikusService = {
   },
 
   insertNewHaiku(db, phrases, penname) {
-    console.log("service1", phrases);
     return db
       .from("phrases")
       .insert(phrases)
       .into("phrases")
       .then(() => {
-        console.log("service2", phrases);
         return HaikusService.insertHaikuId(db, penname);
       });
   },
 
   insertHaikuId(db, penname) {
-    console.log("penname", penname);
     return db
       .from("haikus")
       .insert({ penname: penname })
@@ -41,7 +42,6 @@ const HaikusService = {
       .select(db.raw(`ARRAY(SELECT id FROM phrases ORDER BY id DESC LIMIT 3)`))
       .first()
       .then((ids) => {
-        console.log(ids);
         return db
           .from("haiku_phrases")
           .insert([
