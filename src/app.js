@@ -5,7 +5,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const { NODE_ENV } = require("./config");
 const { CLIENT_ORIGIN } = require("./config");
-const haikusRouter = require("../haikus/haikus-router");
+const haikusRouter = require("../haikus-router/haikus-router");
 
 const app = express();
 
