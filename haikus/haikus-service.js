@@ -1,6 +1,5 @@
 const HaikusService = {
   getAllHaikus(db) {
-    console.log("inside service");
     return db
       .from("haikus")
       .select(

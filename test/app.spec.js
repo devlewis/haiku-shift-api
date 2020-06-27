@@ -40,7 +40,7 @@ describe("App", () => {
       );
 
       console.log("testHaikus!", testHaikus);
-      const expectedHaikus = testHaikus.map((haiku, i) => {
+      const expectedHaikus = testHaikus.map((_, i) => {
         return {
           id: testHaikus[i].id,
           date_created: new Date("2029-01-22T16:28:32.615Z").toDateString(),
