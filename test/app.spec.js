@@ -8,8 +8,10 @@ describe("App", () => {
   const {
     testPhrases,
     testHaikus,
-    testHaikuPhrases,
+    testHaiku_phrases,
   } = helpers.makeHaikuFixtures();
+
+  console.log("in App", testHaiku_phrases);
 
   before("make knex instance", () => {
     db = knex({
@@ -34,14 +36,19 @@ describe("App", () => {
 
     context("Given there are haikus in the database", () => {
       before("insert haikus", () =>
-        helpers.seedHaikuTables(db, testPhrases, testHaikus, testHaikuPhrases)
+        helpers.seedHaikuTables(db, testPhrases, testHaikus, testHaiku_phrases)
       );
 
+      console.log("testHaikus!", testHaikus);
       const expectedHaikus = testHaikus.map((haiku, i) => {
         return {
           id: testHaikus[i].id,
           date_created: new Date("2029-01-22T16:28:32.615Z").toDateString(),
-          haiku: [null, null, null],
+          haiku: [
+            testPhrases[0]["text_p"],
+            testPhrases[1]["text_p"],
+            testPhrases[2]["text_p"],
+          ],
           penname: testHaikus[i].penname,
         };
       });
@@ -54,8 +61,9 @@ describe("App", () => {
 
   describe("POST /", () => {
     beforeEach("insert haikus", () =>
-      helpers.seedHaikuTables(db, testPhrases, testHaikus, testHaikuPhrases)
+      helpers.seedHaikuTables(db, testPhrases, testHaikus, testHaiku_phrases)
     );
+
     context("bad request body", () => {
       it("responds with 404, error message", () => {
         const haiku = ["MISTAKE"];
@@ -86,7 +94,7 @@ describe("App", () => {
 
   describe("GET /penname", () => {
     beforeEach("insert haikus", () =>
-      helpers.seedHaikuTables(db, testPhrases, testHaikus, testHaikuPhrases)
+      helpers.seedHaikuTables(db, testPhrases, testHaikus, testHaiku_phrases)
     );
     context("Given penname doesn't exist", () => {
       it("responds with 400, error message", () => {

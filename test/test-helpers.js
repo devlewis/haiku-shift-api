@@ -59,16 +59,28 @@ function makeHaikusArray() {
 }
 
 function makeHaiku_phrasesArray(phrases, haikus) {
+  console.log("MADE HAIKUS!");
+  console.log([
+    { haiku_id: haikus[0].id, phrase_id: phrases[0].id },
+    { haiku_id: haikus[0].id, phrase_id: phrases[1].id },
+    { haiku_id: haikus[0].id, phrase_id: phrases[2].id },
+    { haiku_id: haikus[1].id, phrase_id: phrases[0].id },
+    { haiku_id: haikus[1].id, phrase_id: phrases[1].id },
+    { haiku_id: haikus[1].id, phrase_id: phrases[2].id },
+    { haiku_id: haikus[2].id, phrase_id: phrases[0].id },
+    { haiku_id: haikus[2].id, phrase_id: phrases[1].id },
+    { haiku_id: haikus[2].id, phrase_id: phrases[2].id },
+  ]);
   return [
-    { haiku_id: haikus[0].id, phrases_id: phrases[0].id },
-    { haiku_id: haikus[0].id, phrases_id: phrases[1].id },
-    { haiku_id: haikus[0].id, phrases_id: phrases[2].id },
-    { haiku_id: haikus[1].id, phrases_id: phrases[0].id },
-    { haiku_id: haikus[1].id, phrases_id: phrases[1].id },
-    { haiku_id: haikus[1].id, phrases_id: phrases[2].id },
-    { haiku_id: haikus[2].id, phrases_id: phrases[0].id },
-    { haiku_id: haikus[2].id, phrases_id: phrases[1].id },
-    { haiku_id: haikus[2].id, phrases_id: phrases[2].id },
+    { haiku_id: haikus[0].id, phrase_id: phrases[0].id },
+    { haiku_id: haikus[0].id, phrase_id: phrases[1].id },
+    { haiku_id: haikus[0].id, phrase_id: phrases[2].id },
+    { haiku_id: haikus[1].id, phrase_id: phrases[0].id },
+    { haiku_id: haikus[1].id, phrase_id: phrases[1].id },
+    { haiku_id: haikus[1].id, phrase_id: phrases[2].id },
+    { haiku_id: haikus[2].id, phrase_id: phrases[0].id },
+    { haiku_id: haikus[2].id, phrase_id: phrases[1].id },
+    { haiku_id: haikus[2].id, phrase_id: phrases[2].id },
   ];
 }
 
@@ -125,6 +137,7 @@ function makeHaikuFixtures() {
   const testPhrases = makePhrasesArray();
   const testHaikus = makeHaikusArray();
   const testHaiku_phrases = makeHaiku_phrasesArray(testPhrases, testHaikus);
+  console.log(testHaiku_phrases);
   return { testPhrases, testHaikus, testHaiku_phrases };
 }
 
