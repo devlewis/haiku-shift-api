@@ -19,7 +19,7 @@ the inputs of previous users.
 
 ### Run Program
 
-- Create local database and user
+- Create local database and user, local test database and user
 - Run `npm run migrate`
 - Make requests using the root: `localhost:8000` or your specified port
 
